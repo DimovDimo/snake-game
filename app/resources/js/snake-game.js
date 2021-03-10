@@ -1,10 +1,12 @@
 const space = document.getElementById("snake-game");
 const snakeSpace = space.getContext("2d");
 
-let snake = [{x: 300, y: 300}];
+let snake = [{horizontal: 300, vertical: 300}];
 
 ////////////////////
 drawSpace();
+stretchSnake();
+motion();
 stretchSnake();
 ////////////////////
 
@@ -14,10 +16,10 @@ function stretchSnake() {
 
 function snakePiece(piece) {  
     snakeSpace.fillStyle = "#66ff00";    
-    snakeSpace.fillRect(piece.x, piece.y, 20, 20);
+    snakeSpace.fillRect(piece.horizontal, piece.vertical, 20, 20);
     
     snakeSpace.strokestyle = "#568203";
-    snakeSpace.strokeRect(piece.x, piece.y, 20, 20);
+    snakeSpace.strokeRect(piece.horizontal, piece.vertical, 20, 20);
 }
 
 function drawSpace() {
@@ -26,4 +28,14 @@ function drawSpace() {
 
     snakeSpace.strokestyle = "#a08d39";
     snakeSpace.strokeRect(0, 0, space.width, space.height);
+}
+
+function motion() {
+    const head = {
+        horizontal: snake[0].horizontal + 20,
+        vertical: snake[0].vertical + 0
+    };
+    
+    snake.unshift(head);
+    snake.pop();
 }
