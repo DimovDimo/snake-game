@@ -3,12 +3,18 @@ const snakeSpace = space.getContext("2d");
 
 let snake = [{horizontal: 300, vertical: 300}];
 
-////////////////////
-drawSpace();
-stretchSnake();
-motion();
-stretchSnake();
-////////////////////
+engine();
+
+function engine() {
+    setTimeout(update, 500);
+}
+
+function update() {
+    drawSpace();
+    motion();
+    stretchSnake();
+    engine();
+}
 
 function stretchSnake() {
     snake.forEach(snakePiece);
