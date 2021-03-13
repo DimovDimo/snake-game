@@ -11,6 +11,8 @@ let snake = [{ horizontal: 300, vertical: 300 }];
 let horizontal = 20;
 let vertical = 0;
 
+let isNewRoad = false;
+
 document.addEventListener("keydown", control);
 
 engine();
@@ -20,15 +22,31 @@ function engine() {
 }
 
 function update() {
+    isNewRoad = false;
     drawSpace();
     motion();
     stretchSnake();
     engine();
 }
 
-function control(keydown) {
+function control(keydown) {    
+    if (isNewRoad) {
+        return;
+    }
+
+    isNewRoad = true;
     let key = keydown.keyCode;
-    //TODO    
+    newRoad(key, UP, 0, -20);
+    newRoad(key, DOWN, 0, 20);
+    newRoad(key, LEFT, -20, 0);
+    newRoad(key, RIGHT, 20, 0);
+}
+
+function newRoad(key, keyCode, roadHorizontal, roadVertical) {
+    if (key === keyCode) {
+        horizontal = roadHorizontal;
+        vertical = roadVertical;
+    }
 }
 
 function stretchSnake() {
@@ -37,10 +55,10 @@ function stretchSnake() {
 
 function snakePiece(piece) {
     snakeSpace.fillStyle = "#66ff00";
-    snakeSpace.fillRect(piece.horizontal, piece.vertical, horizontal, horizontal);
+    snakeSpace.fillRect(piece.horizontal, piece.vertical, 20, 20);
 
     snakeSpace.strokestyle = "#568203";
-    snakeSpace.strokeRect(piece.horizontal, piece.vertical, horizontal, horizontal);
+    snakeSpace.strokeRect(piece.horizontal, piece.vertical, 20, 20);
 }
 
 function drawSpace() {
