@@ -36,17 +36,25 @@ function control(keydown) {
 
     isNewRoad = true;
     let key = keydown.keyCode;
-    newRoad(key, UP, 0, -20);
-    newRoad(key, DOWN, 0, 20);
-    newRoad(key, LEFT, -20, 0);
-    newRoad(key, RIGHT, 20, 0);
+    newRoad(key, UP, 0, -20, vertical, 20);
+    newRoad(key, DOWN, 0, 20, vertical, -20);
+    newRoad(key, LEFT, -20, 0, horizontal, 20);
+    newRoad(key, RIGHT, 20, 0, horizontal, -20);
 }
 
-function newRoad(key, keyCode, roadHorizontal, roadVertical) {
-    if (key === keyCode) {
+function newRoad(key, keyCode, roadHorizontal, roadVertical, move, speed) {
+    let isChanging = isChangingRoad(move, speed, key, keyCode);
+    if (isChanging) {
         horizontal = roadHorizontal;
         vertical = roadVertical;
     }
+}
+
+function isChangingRoad(move, speed, key, keyCode) {
+    let notBack = !(move === speed);
+    let isKey = (key === keyCode);
+
+    return notBack && isKey;
 }
 
 function stretchSnake() {
