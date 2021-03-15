@@ -2,9 +2,16 @@ const space = document.getElementById("snake-game");
 const snakeSpace = space.getContext("2d");
 
 const UP = 38;
+const W = 87;
+
 const DOWN = 40;
+const S = 83;
+
 const LEFT = 37;
+const A = 65;
+
 const RIGHT = 39;
+const D = 68;
 
 let snake = [{ horizontal: 300, vertical: 300 }];
 
@@ -37,9 +44,13 @@ function control(keydown) {
     isNewRoad = true;
     let key = keydown.keyCode;
     newRoad(key, UP, 0, -20, vertical, 20);
+    newRoad(key, W, 0, -20, vertical, 20);
     newRoad(key, DOWN, 0, 20, vertical, -20);
+    newRoad(key, S, 0, 20, vertical, -20);
     newRoad(key, LEFT, -20, 0, horizontal, 20);
+    newRoad(key, A, -20, 0, horizontal, 20);
     newRoad(key, RIGHT, 20, 0, horizontal, -20);
+    newRoad(key, D, 20, 0, horizontal, -20);
 }
 
 function newRoad(key, keyCode, roadHorizontal, roadVertical, move, speed) {
