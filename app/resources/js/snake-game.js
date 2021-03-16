@@ -13,7 +13,11 @@ const A = 65;
 const RIGHT = 39;
 const D = 68;
 
-let snake = [{ horizontal: 300, vertical: 300 }];
+let snake = [{ horizontal: 300, vertical: 300 }, 
+    { horizontal: 280, vertical: 300 },
+    { horizontal: 260, vertical: 300 },
+    { horizontal: 240, vertical: 300 },
+];
 
 let horizontal = 20;
 let vertical = 0;
@@ -24,8 +28,12 @@ document.addEventListener("keydown", control);
 
 engine();
 
-function engine() {
-    setTimeout(update, 500);
+function engine() { 
+    if (isGameOver()) {
+        return;
+    }
+
+    setTimeout(update, 200);
 }
 
 function update() {
@@ -36,7 +44,14 @@ function update() {
     engine();
 }
 
-function control(keydown) {    
+function isGameOver() {
+    let touchCeiling = 0 > snake[0].vertical;
+    let touchLeft = 0 > snake[0].horizontal;
+
+    return touchCeiling || touchLeft;
+}
+
+function control(keydown) {
     if (isNewRoad) {
         return;
     }
