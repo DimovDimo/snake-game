@@ -48,7 +48,10 @@ function isGameOver() {
     let touchCeiling = 0 > snake[0].vertical;
     let touchLeft = 0 > snake[0].horizontal;
 
-    return touchCeiling || touchLeft;
+    let touchRight = space.height < snake[0].vertical + 20;
+    let touchFloor = space.width < snake[0].horizontal + 20;
+
+    return touchCeiling || touchLeft || touchRight || touchFloor;
 }
 
 function control(keydown) {
