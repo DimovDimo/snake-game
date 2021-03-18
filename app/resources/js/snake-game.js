@@ -17,6 +17,9 @@ let snake = [{ horizontal: 300, vertical: 300 },
     { horizontal: 280, vertical: 300 },
     { horizontal: 260, vertical: 300 },
     { horizontal: 240, vertical: 300 },
+    { horizontal: 220, vertical: 300 },
+    { horizontal: 200, vertical: 300 },
+    { horizontal: 180, vertical: 300 },
 ];
 
 let horizontal = 20;
@@ -33,7 +36,7 @@ function engine() {
         return;
     }
 
-    setTimeout(update, 200);
+    setTimeout(update, 500);
 }
 
 function update() {
@@ -45,6 +48,27 @@ function update() {
 }
 
 function isGameOver() {
+    return touchSides() || touchTail();
+}
+
+function touchTail() {
+    for (let i = 1; i < snake.length; i++) {
+        if (comparePieces(snake[0], snake[i])) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function comparePieces(firstPiece, secondPiece) {
+    let verticalPieces = (firstPiece.vertical === secondPiece.vertical);
+    let horizontalPieces = (firstPiece.horizontal === secondPiece.horizontal);
+
+    return verticalPieces && horizontalPieces;
+}
+
+function touchSides() {
     let touchCeiling = 0 > snake[0].vertical;
     let touchLeft = 0 > snake[0].horizontal;
 
