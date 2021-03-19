@@ -13,25 +13,29 @@ const A = 65;
 const RIGHT = 39;
 const D = 68;
 
-let snake = [{ horizontal: 300, vertical: 300 }, 
-    { horizontal: 280, vertical: 300 },
-    { horizontal: 260, vertical: 300 },
-    { horizontal: 240, vertical: 300 },
-    { horizontal: 220, vertical: 300 },
-    { horizontal: 200, vertical: 300 },
-    { horizontal: 180, vertical: 300 },
+let snake = [{ horizontal: 300, vertical: 300 },
+{ horizontal: 280, vertical: 300 },
+{ horizontal: 260, vertical: 300 },
+{ horizontal: 240, vertical: 300 },
+{ horizontal: 220, vertical: 300 },
+{ horizontal: 200, vertical: 300 },
+{ horizontal: 180, vertical: 300 },
 ];
 
 let horizontal = 20;
 let vertical = 0;
+
+let mealHorizontal = 0;
+let mealVertical = 0;
 
 let isNewRoad = false;
 
 document.addEventListener("keydown", control);
 
 engine();
+meal();
 
-function engine() { 
+function engine() {
     if (isGameOver()) {
         return;
     }
@@ -43,9 +47,29 @@ function update() {
     isNewRoad = false;
     drawSpace();
     motion();
+    paintingMeal();
     stretchSnake();
     engine();
 }
+
+//TODO
+//====================================================== 
+function meal() {
+    mealHorizontal = newRandomMeal(0, space.width - 20);
+    mealVertical = newRandomMeal(0, space.height - 20);
+}
+
+function newRandomMeal(min, max) {
+    let intervalSize = max - min;
+    let newRandom = min + Math.random() * intervalSize;
+
+    return 20 * Math.round(newRandom / 20);
+}
+
+function paintingMeal() {
+    //TODO
+}
+//======================================================
 
 function isGameOver() {
     return touchSides() || touchTail();
