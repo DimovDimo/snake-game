@@ -58,7 +58,7 @@ function meal() {
     mealHorizontal = newRandomMeal(0, space.width - 20);
     mealVertical = newRandomMeal(0, space.height - 20);
 }
-
+//======================================================
 function newRandomMeal(min, max) {
     let intervalSize = max - min;
     let newRandom = min + Math.random() * intervalSize;
@@ -67,9 +67,12 @@ function newRandomMeal(min, max) {
 }
 
 function paintingMeal() {
-    //TODO
+    snakeSpace.fillStyle = "#ff0800";
+    snakeSpace.fillRect(mealHorizontal, mealVertical, 20, 20);
+
+    snakeSpace.strokestyle = "#660000";    
+    snakeSpace.strokeRect(mealHorizontal, mealVertical, 20, 20);
 }
-//======================================================
 
 function isGameOver() {
     return touchSides() || touchTail();
