@@ -13,14 +13,7 @@ const A = 65;
 const RIGHT = 39;
 const D = 68;
 
-let snake = [{ horizontal: 300, vertical: 300 },
-{ horizontal: 280, vertical: 300 },
-{ horizontal: 260, vertical: 300 },
-{ horizontal: 240, vertical: 300 },
-{ horizontal: 220, vertical: 300 },
-{ horizontal: 200, vertical: 300 },
-{ horizontal: 180, vertical: 300 },
-];
+let snake = [{ horizontal: 300, vertical: 300 }];
 
 let horizontal = 20;
 let vertical = 0;
@@ -59,6 +52,8 @@ function meal() {
     mealVertical = newRandomMeal(0, space.height - 20);
 }
 //======================================================
+
+
 function newRandomMeal(min, max) {
     let intervalSize = max - min;
     let newRandom = min + Math.random() * intervalSize;
@@ -70,7 +65,7 @@ function paintingMeal() {
     snakeSpace.fillStyle = "#ff0800";
     snakeSpace.fillRect(mealHorizontal, mealVertical, 20, 20);
 
-    snakeSpace.strokestyle = "#660000";    
+    snakeSpace.strokestyle = "#660000";
     snakeSpace.strokeRect(mealHorizontal, mealVertical, 20, 20);
 }
 
@@ -158,11 +153,33 @@ function drawSpace() {
 }
 
 function motion() {
-    const piece = {
+    let piece = newPiece();
+    addPiece(piece);
+    crawling(piece);
+}
+
+function isMeal(piece) {
+    let isVertical = (piece.vertical === mealVertical);
+    let isHorizontal = (piece.horizontal === mealHorizontal);
+
+    return isVertical && isHorizontal;
+}
+
+function newPiece() {
+    return { 
         horizontal: snake[0].horizontal + horizontal,
         vertical: snake[0].vertical + vertical
     };
+}
 
+function addPiece(piece) {
     snake.unshift(piece);
-    snake.pop();
+}
+
+function crawling(piece) {
+    if (isMeal(piece)) {
+        meal();
+    } else {
+        snake.pop();
+    }
 }
