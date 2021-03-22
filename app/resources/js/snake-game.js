@@ -45,14 +45,23 @@ function update() {
     engine();
 }
 
-//TODO
-//====================================================== 
 function meal() {
+    newMeal();
+    eat();
+}
+
+function newMeal() {
     mealHorizontal = newRandomMeal(0, space.width - 20);
     mealVertical = newRandomMeal(0, space.height - 20);
 }
-//======================================================
 
+function eat() {
+    snake.forEach(function eatMeal(piece) {
+        if (isMeal(piece)) {
+            meal();
+        }
+    });
+}
 
 function newRandomMeal(min, max) {
     let intervalSize = max - min;
@@ -166,7 +175,7 @@ function isMeal(piece) {
 }
 
 function newPiece() {
-    return { 
+    return {
         horizontal: snake[0].horizontal + horizontal,
         vertical: snake[0].vertical + vertical
     };
