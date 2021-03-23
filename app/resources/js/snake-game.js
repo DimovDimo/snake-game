@@ -1,3 +1,4 @@
+const snakeLength = document.getElementById("snake-length");
 const space = document.getElementById("snake-game");
 const snakeSpace = space.getContext("2d");
 
@@ -42,7 +43,12 @@ function update() {
     motion();
     paintingMeal();
     stretchSnake();
+    printResults();
     engine();
+}
+
+function printResults() {
+    snakeLength.innerText = snake.length;
 }
 
 function meal() {
