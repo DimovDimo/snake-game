@@ -2,6 +2,8 @@ const snakeLength = document.getElementById("snake-length");
 const space = document.getElementById("snake-game");
 const snakeSpace = space.getContext("2d");
 
+const size = 20;
+
 const UP = 38;
 const W = 87;
 
@@ -16,7 +18,7 @@ const D = 68;
 
 let snake = [{ horizontal: 300, vertical: 300 }];
 
-let horizontal = 20;
+let horizontal = size;
 let vertical = 0;
 
 let mealHorizontal = 0;
@@ -57,8 +59,8 @@ function meal() {
 }
 
 function newMeal() {
-    mealHorizontal = newRandomMeal(0, space.width - 20);
-    mealVertical = newRandomMeal(0, space.height - 20);
+    mealHorizontal = newRandomMeal(0, space.width - size);
+    mealVertical = newRandomMeal(0, space.height - size);
 }
 
 function eat() {
@@ -73,15 +75,15 @@ function newRandomMeal(min, max) {
     let intervalSize = max - min;
     let newRandom = min + Math.random() * intervalSize;
 
-    return 20 * Math.round(newRandom / 20);
+    return size * Math.round(newRandom / size);
 }
 
 function paintingMeal() {
     snakeSpace.fillStyle = "#ff0800";
-    snakeSpace.fillRect(mealHorizontal, mealVertical, 20, 20);
+    snakeSpace.fillRect(mealHorizontal, mealVertical, size, size);
 
     snakeSpace.strokestyle = "#660000";
-    snakeSpace.strokeRect(mealHorizontal, mealVertical, 20, 20);
+    snakeSpace.strokeRect(mealHorizontal, mealVertical, size, size);
 }
 
 function isGameOver() {
@@ -109,8 +111,8 @@ function touchSides() {
     let touchCeiling = 0 > snake[0].vertical;
     let touchLeft = 0 > snake[0].horizontal;
 
-    let touchRight = space.height < snake[0].vertical + 20;
-    let touchFloor = space.width < snake[0].horizontal + 20;
+    let touchRight = space.height < snake[0].vertical + size;
+    let touchFloor = space.width < snake[0].horizontal + size;
 
     return touchCeiling || touchLeft || touchRight || touchFloor;
 }
@@ -122,14 +124,14 @@ function control(keydown) {
 
     isNewRoad = true;
     let key = keydown.keyCode;
-    newRoad(key, UP, 0, -20, vertical, 20);
-    newRoad(key, W, 0, -20, vertical, 20);
-    newRoad(key, DOWN, 0, 20, vertical, -20);
-    newRoad(key, S, 0, 20, vertical, -20);
-    newRoad(key, LEFT, -20, 0, horizontal, 20);
-    newRoad(key, A, -20, 0, horizontal, 20);
-    newRoad(key, RIGHT, 20, 0, horizontal, -20);
-    newRoad(key, D, 20, 0, horizontal, -20);
+    newRoad(key, UP, 0, -size, vertical, size);
+    newRoad(key, W, 0, -size, vertical, size);
+    newRoad(key, DOWN, 0, size, vertical, -size);
+    newRoad(key, S, 0, size, vertical, -size);
+    newRoad(key, LEFT, -size, 0, horizontal, size);
+    newRoad(key, A, -size, 0, horizontal, size);
+    newRoad(key, RIGHT, size, 0, horizontal, -size);
+    newRoad(key, D, size, 0, horizontal, -size);
 }
 
 function newRoad(key, keyCode, roadHorizontal, roadVertical, move, speed) {
@@ -153,10 +155,10 @@ function stretchSnake() {
 
 function snakePiece(piece) {
     snakeSpace.fillStyle = "#66ff00";
-    snakeSpace.fillRect(piece.horizontal, piece.vertical, 20, 20);
+    snakeSpace.fillRect(piece.horizontal, piece.vertical, size, size);
 
     snakeSpace.strokestyle = "#568203";
-    snakeSpace.strokeRect(piece.horizontal, piece.vertical, 20, 20);
+    snakeSpace.strokeRect(piece.horizontal, piece.vertical, size, size);
 }
 
 function drawSpace() {
