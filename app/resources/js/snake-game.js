@@ -2,7 +2,9 @@ const snakeLength = document.getElementById("snake-length");
 const space = document.getElementById("snake-game");
 const snakeSpace = space.getContext("2d");
 
-const size = 20;
+const maxPosition = 2;
+
+const size = 40;
 
 const UP = 38;
 const W = 87;
@@ -16,7 +18,7 @@ const A = 65;
 const RIGHT = 39;
 const D = 68;
 
-let snake = [{ horizontal: 300, vertical: 300 }];
+let snake = [{ horizontal: size, vertical: size }];
 
 let horizontal = size;
 let vertical = 0;
@@ -59,8 +61,16 @@ function meal() {
 }
 
 function newMeal() {
-    mealHorizontal = newRandomMeal(0, space.width - size);
-    mealVertical = newRandomMeal(0, space.height - size);
+    mealHorizontal = getMealPosition(space.width);
+    mealVertical = getMealPosition(space.height);
+}
+
+function getMealPosition(spaceDimension) {
+    return newRandomMeal(size, getMaxPosition(spaceDimension));
+}
+
+function getMaxPosition(spaceDimension) {
+    return spaceDimension - (maxPosition * size);
 }
 
 function eat() {
