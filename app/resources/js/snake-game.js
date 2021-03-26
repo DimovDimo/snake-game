@@ -134,6 +134,10 @@ function control(keydown) {
 
     isNewRoad = true;
     let key = keydown.keyCode;
+    keyControl(key);
+}
+
+function keyControl(key) {
     newRoad(key, UP, 0, -size, vertical, size);
     newRoad(key, W, 0, -size, vertical, size);
     newRoad(key, DOWN, 0, size, vertical, -size);
