@@ -33,100 +33,6 @@ document.addEventListener("keydown", control);
 engine();
 meal();
 
-function engine() {
-    if (isGameOver()) {
-        return;
-    }
-
-    setTimeout(update, 500);
-}
-
-function update() {
-    isNewRoad = false;
-    drawSpace();
-    motion();
-    paintingMeal();
-    stretchSnake();
-    printResults();
-    engine();
-}
-
-function printResults() {
-    snakeLength.innerText = snake.length;
-}
-
-function meal() {
-    newMeal();
-    eat();
-}
-
-function newMeal() {
-    mealHorizontal = getMealPosition(space.width);
-    mealVertical = getMealPosition(space.height);
-}
-
-function getMealPosition(spaceDimension) {
-    return newRandomMeal(size, getMaxPosition(spaceDimension));
-}
-
-function getMaxPosition(spaceDimension) {
-    return spaceDimension - (maxPosition * size);
-}
-
-function eat() {
-    snake.forEach(function eatMeal(piece) {
-        if (isMeal(piece)) {
-            meal();
-        }
-    });
-}
-
-function newRandomMeal(min, max) {
-    let intervalSize = max - min;
-    let newRandom = min + Math.random() * intervalSize;
-
-    return size * Math.round(newRandom / size);
-}
-
-function paintingMeal() {
-    snakeSpace.fillStyle = "#ff0800";
-    snakeSpace.fillRect(mealHorizontal, mealVertical, size, size);
-
-    snakeSpace.strokestyle = "#660000";
-    snakeSpace.strokeRect(mealHorizontal, mealVertical, size, size);
-}
-
-function isGameOver() {
-    return touchSides() || touchTail();
-}
-
-function touchTail() {
-    for (let i = 1; i < snake.length; i++) {
-        if (comparePieces(snake[0], snake[i])) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-function comparePieces(firstPiece, secondPiece) {
-    let verticalPieces = (firstPiece.vertical === secondPiece.vertical);
-    let horizontalPieces = (firstPiece.horizontal === secondPiece.horizontal);
-
-    return verticalPieces && horizontalPieces;
-}
-
-function touchSides() {
-    let touchCeiling = 0 > snake[0].vertical;
-    let touchLeft = 0 > snake[0].horizontal;
-
-    let touchRight = space.height < snake[0].vertical + size;
-    let touchFloor = space.width < snake[0].horizontal + size;
-
-    return touchCeiling || touchLeft || touchRight || touchFloor;
-}
-
 function control(keydown) {
     if (isNewRoad) {
         return;
@@ -163,16 +69,53 @@ function isChangingRoad(move, speed, key, keyCode) {
     return notBack && isKey;
 }
 
-function stretchSnake() {
-    snake.forEach(snakePiece);
+function engine() {
+    if (isGameOver()) {
+        return;
+    }
+
+    setTimeout(update, 500);
 }
 
-function snakePiece(piece) {
-    snakeSpace.fillStyle = "#66ff00";
-    snakeSpace.fillRect(piece.horizontal, piece.vertical, size, size);
+function isGameOver() {
+    return touchSides() || touchTail();
+}
 
-    snakeSpace.strokestyle = "#568203";
-    snakeSpace.strokeRect(piece.horizontal, piece.vertical, size, size);
+function touchSides() {
+    let touchCeiling = 0 > snake[0].vertical;
+    let touchLeft = 0 > snake[0].horizontal;
+
+    let touchRight = space.height < snake[0].vertical + size;
+    let touchFloor = space.width < snake[0].horizontal + size;
+
+    return touchCeiling || touchLeft || touchRight || touchFloor;
+}
+
+function touchTail() {
+    for (let i = 1; i < snake.length; i++) {
+        if (comparePieces(snake[0], snake[i])) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function comparePieces(firstPiece, secondPiece) {
+    let verticalPieces = (firstPiece.vertical === secondPiece.vertical);
+    let horizontalPieces = (firstPiece.horizontal === secondPiece.horizontal);
+
+    return verticalPieces && horizontalPieces;
+}
+
+function update() {
+    isNewRoad = false;
+    drawSpace();
+    motion();
+    paintingMeal();
+    stretchSnake();
+    printResults();
+    engine();
 }
 
 function drawSpace() {
@@ -187,13 +130,6 @@ function motion() {
     let piece = newPiece();
     addPiece(piece);
     crawling(piece);
-}
-
-function isMeal(piece) {
-    let isVertical = (piece.vertical === mealVertical);
-    let isHorizontal = (piece.horizontal === mealHorizontal);
-
-    return isVertical && isHorizontal;
 }
 
 function newPiece() {
@@ -213,4 +149,68 @@ function crawling(piece) {
     } else {
         snake.pop();
     }
+}
+
+function isMeal(piece) {
+    let isVertical = (piece.vertical === mealVertical);
+    let isHorizontal = (piece.horizontal === mealHorizontal);
+
+    return isVertical && isHorizontal;
+}
+
+function meal() {
+    newMeal();
+    eat();
+}
+
+function newMeal() {
+    mealHorizontal = getMealPosition(space.width);
+    mealVertical = getMealPosition(space.height);
+}
+
+function getMealPosition(spaceDimension) {
+    return newRandomMeal(size, getMaxPosition(spaceDimension));
+}
+
+function newRandomMeal(min, max) {
+    let intervalSize = max - min;
+    let newRandom = min + Math.random() * intervalSize;
+
+    return size * Math.round(newRandom / size);
+}
+
+function getMaxPosition(spaceDimension) {
+    return spaceDimension - (maxPosition * size);
+}
+
+function eat() {
+    snake.forEach(function eatMeal(piece) {
+        if (isMeal(piece)) {
+            meal();
+        }
+    });
+}
+
+function paintingMeal() {
+    snakeSpace.fillStyle = "#ff0800";
+    snakeSpace.fillRect(mealHorizontal, mealVertical, size, size);
+
+    snakeSpace.strokestyle = "#660000";
+    snakeSpace.strokeRect(mealHorizontal, mealVertical, size, size);
+}
+
+function stretchSnake() {
+    snake.forEach(snakePiece);
+}
+
+function snakePiece(piece) {
+    snakeSpace.fillStyle = "#66ff00";
+    snakeSpace.fillRect(piece.horizontal, piece.vertical, size, size);
+
+    snakeSpace.strokestyle = "#568203";
+    snakeSpace.strokeRect(piece.horizontal, piece.vertical, size, size);
+}
+
+function printResults() {
+    snakeLength.innerText = snake.length;
 }
