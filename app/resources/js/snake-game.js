@@ -1,10 +1,14 @@
 const snakeLength = document.getElementById("snake-length");
+const snakeMaxLength = document.getElementById("snake-max-length");
+const snakePercentageMaxLength = document.getElementById("snake-percentage-max-length");
+// TODO: win isGameOver snakeLength = snakeMaxLength
+
 const space = document.getElementById("snake-game");
 const snakeSpace = space.getContext("2d");
 
 const maxPosition = 2;
 
-const size = 40;
+const size = 50;
 
 const UP = 38;
 const W = 87;
@@ -212,5 +216,29 @@ function snakePiece(piece) {
 }
 
 function printResults() {
+    printLength();
+    let maxLength = printMaxLength();
+    printPercentage(maxLength);
+}
+
+function printLength() {
     snakeLength.innerText = snake.length;
+}
+
+function printMaxLength() {
+    let spaceArea = space.height * space.width;
+    let sizeArea = size * size;
+    let maxLength = Math.round(spaceArea / sizeArea);
+    snakeMaxLength.innerText = maxLength;
+
+    return maxLength;
+}
+
+function printPercentage(maxLength) {
+    let percentage = getPercentage(maxLength);
+    snakePercentageMaxLength.innerText = (percentage).toFixed(2);
+}
+
+function getPercentage(maxLength) {
+    return (snake.length / maxLength) * 100;
 }
