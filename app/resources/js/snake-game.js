@@ -8,7 +8,7 @@ const snakeSpace = space.getContext("2d");
 
 const maxPosition = 2;
 
-const size = 50;
+const size = 203;
 
 const UP = 38;
 const W = 87;
@@ -22,7 +22,7 @@ const A = 65;
 const RIGHT = 39;
 const D = 68;
 
-let snake = [{ horizontal: size, vertical: size }];
+let snake = [{ horizontal: 0, vertical: 0 }];
 
 let horizontal = size;
 let vertical = 0;
@@ -78,7 +78,7 @@ function engine() {
         return;
     }
 
-    setTimeout(update, 500);
+    setTimeout(update, 2000);
 }
 
 function isGameOver() {
@@ -170,10 +170,11 @@ function meal() {
 function newMeal() {
     mealHorizontal = getMealPosition(space.width);
     mealVertical = getMealPosition(space.height);
+    snakeConditionAction(isMeal, newMeal);
 }
 
 function getMealPosition(spaceDimension) {
-    return newRandomMeal(size, getMaxPosition(spaceDimension));
+    return newRandomMeal(0, getMaxPosition(spaceDimension));
 }
 
 function newRandomMeal(min, max) {
@@ -187,12 +188,16 @@ function getMaxPosition(spaceDimension) {
     return spaceDimension - (maxPosition * size);
 }
 
-function eat() {
-    snake.forEach(function eatMeal(piece) {
-        if (isMeal(piece)) {
-            meal();
+function snakeConditionAction(condition, action) {
+    snake.forEach(function conditionAction(piece) {
+        if (condition(piece)) {
+            action();
         }
     });
+}
+
+function eat() {
+    snakeConditionAction(isMeal, meal);
 }
 
 function paintingMeal() {
@@ -226,12 +231,17 @@ function printLength() {
 }
 
 function printMaxLength() {
-    let spaceArea = space.height * space.width;
-    let sizeArea = size * size;
-    let maxLength = Math.round(spaceArea / sizeArea);
+    let maxLength = getMaxLength();
     snakeMaxLength.innerText = maxLength;
 
     return maxLength;
+}
+
+function getMaxLength() {
+    let spaceHeight = Math.floor(space.height / size);
+    let spaceWidth = Math.floor(space.width / size);
+    
+    return spaceHeight * spaceWidth;
 }
 
 function printPercentage(maxLength) {
