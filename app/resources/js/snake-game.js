@@ -82,7 +82,7 @@ function engine() {
 }
 
 function isGameOver() {
-    return touchSides() || touchTail();
+    return touchSides() || touchTail() || isWin();
 }
 
 function touchSides() {
@@ -110,6 +110,10 @@ function comparePieces(firstPiece, secondPiece) {
     let horizontalPieces = (firstPiece.horizontal === secondPiece.horizontal);
 
     return verticalPieces && horizontalPieces;
+}
+
+function isWin() {
+    return snake.length === getMaxLength();
 }
 
 function update() {
@@ -168,6 +172,19 @@ function meal() {
 }
 
 function newMeal() {
+    if (isWin()) {
+        nullifyMeal();
+    } else {
+        generateMeal();
+    }
+}
+
+function nullifyMeal() {
+    mealHorizontal = -size;
+    mealVertical = -size;
+}
+
+function generateMeal() {
     mealHorizontal = getMealPosition(space.width);
     mealVertical = getMealPosition(space.height);
     snakeConditionAction(isMeal, newMeal);
@@ -240,7 +257,7 @@ function printMaxLength() {
 function getMaxLength() {
     let spaceHeight = Math.floor(space.height / size);
     let spaceWidth = Math.floor(space.width / size);
-    
+
     return spaceHeight * spaceWidth;
 }
 
