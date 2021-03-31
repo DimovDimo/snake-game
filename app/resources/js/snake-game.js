@@ -1,7 +1,7 @@
 const snakeLength = document.getElementById("snake-length");
 const snakeMaxLength = document.getElementById("snake-max-length");
 const snakePercentageMaxLength = document.getElementById("snake-percentage-max-length");
-// TODO: win isGameOver snakeLength = snakeMaxLength
+const gameOver = document.getElementById("game-over");
 
 const space = document.getElementById("snake-game");
 const snakeSpace = space.getContext("2d");
@@ -75,6 +75,7 @@ function isChangingRoad(move, speed, key, keyCode) {
 
 function engine() {
     if (isGameOver()) {
+        printGameOver()
         return;
     }
 
@@ -114,6 +115,10 @@ function comparePieces(firstPiece, secondPiece) {
 
 function isWin() {
     return snake.length === getMaxLength();
+}
+
+function printGameOver() {
+    gameOver.innerText = `Success ${printResults()}%`;
 }
 
 function update() {
@@ -240,7 +245,8 @@ function snakePiece(piece) {
 function printResults() {
     printLength();
     let maxLength = printMaxLength();
-    printPercentage(maxLength);
+
+    return printPercentage(maxLength);
 }
 
 function printLength() {
@@ -263,7 +269,10 @@ function getMaxLength() {
 
 function printPercentage(maxLength) {
     let percentage = getPercentage(maxLength);
-    snakePercentageMaxLength.innerText = (percentage).toFixed(2);
+    let percentageFix = (percentage).toFixed(2);
+    snakePercentageMaxLength.innerText = percentageFix;
+
+    return percentageFix;
 }
 
 function getPercentage(maxLength) {
