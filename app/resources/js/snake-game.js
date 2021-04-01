@@ -8,8 +8,6 @@ const snakeSpace = space.getContext("2d");
 
 const maxPosition = 2;
 
-const size = 203;
-
 const UP = 38;
 const W = 87;
 
@@ -22,15 +20,20 @@ const A = 65;
 const RIGHT = 39;
 const D = 68;
 
-let snake = [{ horizontal: 0, vertical: 0 }];
+let timeout = 2000;
+let size = 203;
+let isNewRoad = false;
 
 let horizontal = size;
 let vertical = 0;
-
 let mealHorizontal = 0;
 let mealVertical = 0;
 
-let isNewRoad = false;
+let snake = [{ horizontal: 0, vertical: 0 }];
+
+let spaceColor = "#f2dc7d";
+let mealColor = "#ff0800";
+let snakeColor = "#66ff00";
 
 document.addEventListener("keydown", control);
 
@@ -79,7 +82,7 @@ function engine() {
         return;
     }
 
-    setTimeout(update, 2000);
+    setTimeout(update, timeout);
 }
 
 function isGameOver() {
@@ -132,10 +135,10 @@ function update() {
 }
 
 function drawSpace() {
-    snakeSpace.fillStyle = "#f2dc7d";
+    snakeSpace.fillStyle = spaceColor;
     snakeSpace.fillRect(0, 0, space.width, space.height);
 
-    snakeSpace.strokestyle = "#a08d39";
+    snakeSpace.strokestyle = spaceColor;
     snakeSpace.strokeRect(0, 0, space.width, space.height);
 }
 
@@ -223,10 +226,10 @@ function eat() {
 }
 
 function paintingMeal() {
-    snakeSpace.fillStyle = "#ff0800";
+    snakeSpace.fillStyle = mealColor;
     snakeSpace.fillRect(mealHorizontal, mealVertical, size, size);
 
-    snakeSpace.strokestyle = "#660000";
+    snakeSpace.strokestyle = mealColor;
     snakeSpace.strokeRect(mealHorizontal, mealVertical, size, size);
 }
 
@@ -235,10 +238,10 @@ function stretchSnake() {
 }
 
 function snakePiece(piece) {
-    snakeSpace.fillStyle = "#66ff00";
+    snakeSpace.fillStyle = snakeColor;
     snakeSpace.fillRect(piece.horizontal, piece.vertical, size, size);
 
-    snakeSpace.strokestyle = "#568203";
+    snakeSpace.strokestyle = snakeColor;
     snakeSpace.strokeRect(piece.horizontal, piece.vertical, size, size);
 }
 
