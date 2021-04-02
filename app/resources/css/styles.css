@@ -1,3 +1,87 @@
 #snake-game {
     margin: 20px;
 }
+
+body {
+    background: black;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    font-size: 50px;
+    padding: 6px;
+}
+
+#new-texture {
+    margin-bottom: 10px;
+}
+
+#settings-accordion {
+    background: gainsboro;
+    border-radius: 5px;
+}
+
+hr {
+    margin: 4px 0 4px 0;
+}
+
+#maze-path-color {
+    height: auto;
+}
+
+select {
+    margin-right: 2px;
+    width: 139px;
+}
+
+.accordion {
+    margin: auto;
+    width: 300px;
+}
+
+.accordion-body {
+    padding: 10px;
+}
+
+.input-group {
+    width: 280px;
+}
+
+.input-group-prepend {
+    width: 140px;
+}
+
+#file-name-title {
+    width: auto;
+}
+
+.input-group-append {
+    width: 60px;
+}
+
+#download-group {
+    margin: auto;
+    width: 300px;
+    padding-bottom: 10px;
+}
+
+input, select {
+    border-radius: 5px;
+}
+
+#file-name {
+    border-radius: 3px;
+}
+
+#button-download {
+    width: auto;
+}
+
+canvas {
+    margin-top: 10px;
+}
+
+footer {
+    margin-bottom: 10px;
+}

@@ -6,19 +6,16 @@ const gameOver = document.getElementById("game-over");
 const space = document.getElementById("snake-game");
 const snakeSpace = space.getContext("2d");
 
-const maxPosition = 2;
-
 const UP = 38;
 const W = 87;
-
 const DOWN = 40;
 const S = 83;
-
 const LEFT = 37;
 const A = 65;
-
 const RIGHT = 39;
 const D = 68;
+
+const maxPosition = 2;
 
 let timeout = 2000;
 let size = 203;
