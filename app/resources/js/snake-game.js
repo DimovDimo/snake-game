@@ -17,8 +17,8 @@ const D = 68;
 
 const maxPosition = 2;
 
-let timeout = 2000;
-let size = 203;
+let timeout = Number(document.getElementById("timeout").value);
+let size = Number(document.getElementById("size").value);
 let isNewRoad = false;
 
 let horizontal = size;
