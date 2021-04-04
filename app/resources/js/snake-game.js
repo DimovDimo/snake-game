@@ -28,9 +28,9 @@ let mealVertical = 0;
 
 let snake = [{ horizontal: 0, vertical: 0 }];
 
-let spaceColor = "#f2dc7d";
-let mealColor = "#ff0800";
-let snakeColor = "#66ff00";
+let snakeColor = document.getElementById("snake-color").value;
+let mealColor = document.getElementById("meal-color").value;
+let spaceColor = document.getElementById("space-color").value;
 
 document.addEventListener("keydown", control);
 
