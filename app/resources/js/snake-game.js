@@ -17,6 +17,9 @@ const D = 68;
 
 const maxPosition = 2;
 
+space.width = Number(document.getElementById("width").value);
+space.height = Number(document.getElementById("height").value);
+
 let timeout = Number(document.getElementById("timeout").value);
 let size = Number(document.getElementById("size").value);
 let isNewRoad = false;
