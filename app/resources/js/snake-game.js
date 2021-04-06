@@ -23,6 +23,7 @@ space.height = Number(document.getElementById("height").value);
 let timeout = Number(document.getElementById("timeout").value);
 let size = Number(document.getElementById("size").value);
 let isNewRoad = false;
+let isStart = true;
 
 let horizontal = size;
 let vertical = 0;
@@ -36,6 +37,9 @@ let mealColor = document.getElementById("meal-color").value;
 let spaceColor = document.getElementById("space-color").value;
 
 document.addEventListener("keydown", control);
+
+const startStop = document.getElementById("start-stop");
+startStop.addEventListener("click", startStopGame);
 
 engine();
 meal();
@@ -74,6 +78,17 @@ function isChangingRoad(move, speed, key, keyCode) {
     let isKey = (key === keyCode);
 
     return notBack && isKey;
+}
+
+function startStopGame() {
+    if (isStart) {
+        isStart = false;
+        startStop.innerText = "Stop";
+    } else {
+        isStart = true;
+        startStop.innerText = "Start";
+        engine();
+    }
 }
 
 function engine() {
@@ -125,13 +140,16 @@ function printGameOver() {
 }
 
 function update() {
-    isNewRoad = false;
-    drawSpace();
-    motion();
-    paintingMeal();
-    stretchSnake();
-    printResults();
-    engine();
+    console.log("up");
+    if (isStart) {
+        isNewRoad = false;
+        drawSpace();
+        motion();
+        paintingMeal();
+        stretchSnake();
+        printResults();
+        engine();
+    }
 }
 
 function drawSpace() {

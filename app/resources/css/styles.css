@@ -49,7 +49,7 @@ select {
 }
 
 .input-group-prepend {
-    width: 140px;
+    width: 80px;
 }
 
 #file-name-title {
@@ -57,7 +57,7 @@ select {
 }
 
 .input-group-append {
-    width: 60px;
+    width: 45px;
 }
 
 #download-group {
