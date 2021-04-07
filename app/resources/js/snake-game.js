@@ -17,32 +17,34 @@ const D = 68;
 
 const maxPosition = 2;
 
-space.width = Number(document.getElementById("width").value);
-space.height = Number(document.getElementById("height").value);
+space.width;
+space.height;
 
-let timeout = Number(document.getElementById("timeout").value);
-let size = Number(document.getElementById("size").value);
-let isNewRoad = false;
-let isStart = true;
+let timeout;
+let size;
+let isNewRoad;
+let isStart;
 
-let horizontal = size;
-let vertical = 0;
-let mealHorizontal = 0;
-let mealVertical = 0;
+let horizontal;
+let vertical;
+let mealHorizontal;
+let mealVertical;
 
-let snake = [{ horizontal: 0, vertical: 0 }];
+let snake;
 
-let snakeColor = document.getElementById("snake-color").value;
-let mealColor = document.getElementById("meal-color").value;
-let spaceColor = document.getElementById("space-color").value;
+let snakeColor;
+let mealColor;
+let spaceColor;
 
 document.addEventListener("keydown", control);
 
 const startStop = document.getElementById("start-stop");
 startStop.addEventListener("click", startStopGame);
 
-engine();
-meal();
+const newGame = document.getElementById("new-game");
+newGame.addEventListener("click", newSnakeGame);
+
+newSnakeGame();
 
 function control(keydown) {
     if (isNewRoad) {
@@ -89,6 +91,33 @@ function startStopGame() {
         startStop.innerText = "Start";
         engine();
     }
+}
+
+function newSnakeGame() {
+    space.width = Number(document.getElementById("width").value);
+    space.height = Number(document.getElementById("height").value);
+    
+    timeout = Number(document.getElementById("timeout").value);
+    size = Number(document.getElementById("size").value);
+    isNewRoad = false;
+    isStart = true;
+    
+    horizontal = size;
+    vertical = 0;
+    mealHorizontal = 0;
+    mealVertical = 0;
+    
+    snake = [{ horizontal: 0, vertical: 0 }];
+    
+    snakeColor = document.getElementById("snake-color").value;
+    mealColor = document.getElementById("meal-color").value;
+    spaceColor = document.getElementById("space-color").value;
+
+    gameOver.innerText = "";
+    startStop.innerText = "Start";
+
+    engine();
+    meal();
 }
 
 function engine() {
@@ -140,7 +169,6 @@ function printGameOver() {
 }
 
 function update() {
-    console.log("up");
     if (isStart) {
         isNewRoad = false;
         drawSpace();
