@@ -17,9 +17,6 @@ const D = 68;
 
 const maxPosition = 2;
 
-space.width;
-space.height;
-
 let timeout;
 let size;
 let isNewRoad;
@@ -93,31 +90,65 @@ function startStopGame() {
     }
 }
 
-function newSnakeGame() {
+function newSnakeGame() {//TODO: bug move
+    setMainItems();
+    setStyle();
+    engine();
+    meal();
+}
+
+function setMainItems() {
+    setSpace();
+    setTime();
+    setSize();
+    setSnake();
+}
+
+function setStyle() {
+    setRoad();
+    setMeal();
+    setColors();
+    setTexts();
+}
+
+function setSpace() {
     space.width = Number(document.getElementById("width").value);
     space.height = Number(document.getElementById("height").value);
-    
+}
+
+function setTime() {
     timeout = Number(document.getElementById("timeout").value);
+}
+
+function setSize() {
     size = Number(document.getElementById("size").value);
-    isNewRoad = false;
-    isStart = true;
-    
+}
+
+function setSnake() {
+    snake = [{ horizontal: 0, vertical: 0 }];
+}
+
+function setRoad() {
     horizontal = size;
     vertical = 0;
+    isStart = true;
+    isNewRoad = false;
+}
+
+function setMeal() {
     mealHorizontal = 0;
     mealVertical = 0;
-    
-    snake = [{ horizontal: 0, vertical: 0 }];
-    
+}
+
+function setColors() {
     snakeColor = document.getElementById("snake-color").value;
     mealColor = document.getElementById("meal-color").value;
     spaceColor = document.getElementById("space-color").value;
+}
 
+function setTexts() {
     gameOver.innerText = "";
     startStop.innerText = "Start";
-
-    engine();
-    meal();
 }
 
 function engine() {
