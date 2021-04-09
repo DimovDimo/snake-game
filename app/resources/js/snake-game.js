@@ -82,18 +82,18 @@ function isChangingRoad(move, speed, key, keyCode) {
 function startStopGame() {
     if (isStart) {
         isStart = false;
-        startStop.innerText = "Stop";
+        startStop.innerText = "Start";
     } else {
         isStart = true;
-        startStop.innerText = "Start";
+        startStop.innerText = "Stop";
         engine();
     }
 }
 
-function newSnakeGame() {//TODO: bug move
+function newSnakeGame() {
     setMainItems();
     setStyle();
-    engine();
+    startStopGame();
     meal();
 }
 
@@ -131,7 +131,7 @@ function setSnake() {
 function setRoad() {
     horizontal = size;
     vertical = 0;
-    isStart = true;
+    isStart = false;
     isNewRoad = false;
 }
 
