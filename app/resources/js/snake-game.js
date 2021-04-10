@@ -1,3 +1,9 @@
+document.addEventListener("keydown", control);
+document.getElementById("new-game").addEventListener("click", newSnakeGame);
+
+const startStop = document.getElementById("start-stop");
+startStop.addEventListener("click", startStopGame);
+
 const snakeLength = document.getElementById("snake-length");
 const snakeMaxLength = document.getElementById("snake-max-length");
 const snakePercentageMaxLength = document.getElementById("snake-percentage-max-length");
@@ -5,6 +11,7 @@ const gameOver = document.getElementById("game-over");
 
 const space = document.getElementById("snake-game");
 const snakeSpace = space.getContext("2d");
+const maxPosition = 2;
 
 const UP = 38;
 const W = 87;
@@ -14,8 +21,6 @@ const LEFT = 37;
 const A = 65;
 const RIGHT = 39;
 const D = 68;
-
-const maxPosition = 2;
 
 let timeout;
 let size;
@@ -28,18 +33,9 @@ let mealHorizontal;
 let mealVertical;
 
 let snake;
-
 let snakeColor;
 let mealColor;
 let spaceColor;
-
-document.addEventListener("keydown", control);
-
-const startStop = document.getElementById("start-stop");
-startStop.addEventListener("click", startStopGame);
-
-const newGame = document.getElementById("new-game");
-newGame.addEventListener("click", newSnakeGame);
 
 newSnakeGame();
 
@@ -148,7 +144,6 @@ function setColors() {
 
 function setTexts() {
     gameOver.innerText = "";
-    startStop.innerText = "Start";
 }
 
 function engine() {
