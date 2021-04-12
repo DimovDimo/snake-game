@@ -17,9 +17,13 @@ h1 {
     margin-bottom: 10px;
 }
 
-#settings-accordion {
+#collapsed-accordion {
     background: gainsboro;
     border-radius: 5px;
+}
+
+.instructions {
+    text-align: center;
 }
 
 hr {
