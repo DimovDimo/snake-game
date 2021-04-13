@@ -325,12 +325,12 @@ function printResults() {
 }
 
 function printLength() {
-    snakeLength.innerText = snake.length;
+    snakeLength.value = snake.length;
 }
 
 function printMaxLength() {
     let maxLength = getMaxLength();
-    snakeMaxLength.innerText = maxLength;
+    snakeMaxLength.value = maxLength;
 
     return maxLength;
 }
@@ -345,7 +345,7 @@ function getMaxLength() {
 function printPercentage(maxLength) {
     let percentage = getPercentage(maxLength);
     let percentageFix = (percentage).toFixed(2);
-    snakePercentageMaxLength.innerText = percentageFix;
+    snakePercentageMaxLength.value = percentageFix;
 
     return percentageFix;
 }
