@@ -7,6 +7,8 @@ startStop.addEventListener("click", startStopGame);
 const snakeLength = document.getElementById("snake-length");
 const snakeMaxLength = document.getElementById("snake-max-length");
 const snakePercentageMaxLength = document.getElementById("snake-percentage-max-length");
+
+const result = document.getElementById("result");
 const gameOver = document.getElementById("game-over");
 
 const space = document.getElementById("snake-game");
@@ -143,6 +145,7 @@ function setColors() {
 }
 
 function setTexts() {
+    result.style.display = "none";
     gameOver.innerText = "";
 }
 
@@ -191,6 +194,7 @@ function isWin() {
 }
 
 function printGameOver() {
+    result.style.display = "block";
     gameOver.innerText = `Success ${printResults()}%`;
 }
 

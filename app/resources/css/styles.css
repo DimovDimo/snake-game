@@ -13,6 +13,10 @@ h1 {
     padding: 6px;
 }
 
+#result {
+    display: none;
+}
+
 #new-texture {
     margin-bottom: 10px;
 }
