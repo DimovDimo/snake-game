@@ -15,6 +15,13 @@ h1 {
 
 #result {
     display: none;
+    width: 300px;
+    margin: 0 auto;
+    padding: 7px;
+}
+
+p {
+    margin: 0;
 }
 
 #new-texture {
