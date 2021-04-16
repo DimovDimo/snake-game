@@ -17,6 +17,7 @@ h1 {
     display: none;
     width: 300px;
     margin: 0 auto;
+    margin-bottom: 5px;
     padding: 7px;
 }
 
@@ -24,8 +25,15 @@ p {
     margin: 0;
 }
 
+#new-game, #start-stop {
+    display: block;
+    width: 300px;
+    margin: 0 auto;
+    margin-bottom: 5px;  
+}
+
 #new-texture {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 #collapsed-accordion {
@@ -91,10 +99,6 @@ input, select {
 
 #button-download {
     width: auto;
-}
-
-canvas {
-    margin-top: 10px;
 }
 
 footer {
