@@ -25,6 +25,11 @@ p {
     margin: 0;
 }
 
+.accordion-item p {
+    text-align: left;
+    font-size: 15px;
+}
+
 #new-game, #start-stop {
     display: block;
     width: 300px;
