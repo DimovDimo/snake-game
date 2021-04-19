@@ -1,7 +1,3 @@
-#snake-game {
-    margin: 20px;
-}
-
 body {
     background: #f8f8f8;
     color: black;
@@ -104,6 +100,10 @@ input, select {
 
 #button-download {
     width: auto;
+}
+
+#snake-game {
+    margin-top: 15px;
 }
 
 footer {
